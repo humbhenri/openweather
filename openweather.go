@@ -9,11 +9,9 @@ import (
 )
 
 const (
-	BASEURL = "http://api.openweathermap.org/data/2.5/weather"
-	API     = "api.txt"
+	baseurl = "http://api.openweathermap.org/data/2.5/weather"
+	api     = "api.txt"
 )
-
-//{"coord":{"lon":-0.13,"lat":51.51},"sys":{"message":0.0031,"country":"GB","sunrise":1402199053,"sunset":1402258504},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02d"}],"base":"cmc stations","main":{"temp":296.59,"pressure":1019,"humidity":43,"temp_min":292.59,"temp_max":301.48},"wind":{"speed":5.7,"deg":200,"var_beg":160,"var_end":230,"gust":11.8},"clouds":{"all":20},"dt":1402228200,"id":2643743,"name":"London","cod":200}
 
 type Coord struct {
 	Lon float64 `json:"lon"`
@@ -45,7 +43,7 @@ func GetByCityName(city string) (*Forecast, error) {
 		return nil, err
 	}
 
-	url, err := u.Parse(BASEURL)
+	url, err := u.Parse(baseurl)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +62,7 @@ func GetById(id string) (*Forecast, error) {
 		return nil, err
 	}
 
-	url, err := u.Parse(BASEURL)
+	url, err := u.Parse(baseurl)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +76,7 @@ func GetById(id string) (*Forecast, error) {
 }
 
 func getApiKey() (string, error) {
-	keybytes, err := ioutil.ReadFile(API)
+	keybytes, err := ioutil.ReadFile(api)
 	if err != nil {
 		return "", err
 	}
