@@ -1,6 +1,7 @@
 openweather
 ===========
 
+<<<<<<< HEAD
 http://openweathermap.org/ wrapper in Go.
 
 Example usage:
@@ -26,3 +27,6 @@ func TestGetById(t *testing.T) {
 	}
 }
 ```
+=======
+http://openweathermap.org/ api wrapper for golang
+>>>>>>> b68016836ba2a1c974f8d38501554d1f999afdfb
