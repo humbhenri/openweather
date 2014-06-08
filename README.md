@@ -1,7 +1,6 @@
 openweather
 ===========
 
-<<<<<<< HEAD
 http://openweathermap.org/ wrapper in Go.
 
 Example usage:
