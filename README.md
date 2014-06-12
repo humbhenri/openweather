@@ -6,23 +6,23 @@ http://openweathermap.org/ wrapper in Go.
 Example usage:
 
 ```
-package openweather
+package main
 
 import (
-	"testing"
+	"fmt"
+	o "github.com/humbhenri/openweather"
+	"os"
 )
 
-func TestGetByCity(t *testing.T) {
-	_, err := GetByCityName("Belo Horizonte")
-	if err != nil {
-		t.Error(err.Error())
-	}
-
-}
-func TestGetById(t *testing.T) {
-	_, err := GetById("524901")
-	if err != nil {
-		t.Error(err.Error())
-	}
+func main() {
+	res, _ := o.GetByCityName(os.Args[1])
+	fmt.Printf("%+v\n", res)
 }
 ```
+
+And run like:
+
+```
+OPENWEATHER_API_KEY=$(cat api_key.txt) go run main.go "Rio de Janeiro"
+```
+

@@ -5,12 +5,12 @@ import (
 	"io/ioutil"
 	"net/http"
 	u "net/url"
+	"os"
 	"strings"
 )
 
 const (
 	baseurl = "http://api.openweathermap.org/data/2.5/weather"
-	api     = "api.txt"
 )
 
 type Coord struct {
@@ -38,11 +38,7 @@ type Forecast struct {
 }
 
 func GetByCityName(city string) (*Forecast, error) {
-	key, err := getApiKey()
-	if err != nil {
-		return nil, err
-	}
-
+	key := getApiKey()
 	url, err := u.Parse(baseurl)
 	if err != nil {
 		return nil, err
@@ -57,11 +53,7 @@ func GetByCityName(city string) (*Forecast, error) {
 }
 
 func GetById(id string) (*Forecast, error) {
-	key, err := getApiKey()
-	if err != nil {
-		return nil, err
-	}
-
+	key := getApiKey()
 	url, err := u.Parse(baseurl)
 	if err != nil {
 		return nil, err
@@ -75,15 +67,8 @@ func GetById(id string) (*Forecast, error) {
 	return getForecast(url)
 }
 
-func getApiKey() (string, error) {
-	keybytes, err := ioutil.ReadFile(api)
-	if err != nil {
-		return "", err
-	}
-	key := string(keybytes)
-	key = strings.TrimSpace(key)
-
-	return key, nil
+func getApiKey() string {
+	return strings.TrimSpace(os.Getenv("OPENWEATHER_API_KEY"))
 }
 
 func getForecast(url *u.URL) (*Forecast, error) {
